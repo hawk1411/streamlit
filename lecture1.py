@@ -8,25 +8,17 @@ st.markdown("""
             } 
             </style>
             """, unsafe_allow_html=True)
-st.title("hi! i am stramlit web")
-st.subheader("hi! i am your sun header")
-st.header("i am header")
-st.text("hi i am text function and programmers use me in place of paragraph")
-st.markdown("[GOOGLE](https://www.google.com/)")
-st.markdown("---")
-st.latex(r"x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}") #raw string is denoted by 
-json={"a":"1,2,3","b":"4,5,6"}
-st.json(json)
-code="""
-print("hello world")
-def func():
-return 0; """
-st.code(code,language = "python")
-st.write("# ill explore it tommorow")
-st.metric(label="wind speed", value="120m\^-1", delta='-1.4ms\^-1')#i will see this tommorow th workong of m/s thing
-st.table(tabel)
-st.dataframe(tabel)
-st.image("image.png", caption="this is a image",width=90)
-#st.audio("audio.mp3")
-#st.video("video.mp4")
+
+def change():
+    print("changed")
+    print(st.session_state.changed)#using key we may track the seeion
+
+state = st.checkbox("basic chcekbox",value=False, on_change=change, key="changed")
+
+if state:
+    st.write("chek box was ticked")
+else:
+    pass #no need to do anything
+
+#invoking of a function using this chek box
 
