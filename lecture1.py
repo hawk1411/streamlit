@@ -1,6 +1,13 @@
 import streamlit as st
-
-
+import pandas as pd
+tabel = pd.DataFrame({"column 1":[1,2,3,4,5,6,7], "column 2": [11,12,13,14,15,16,17]})
+st.markdown("""
+            <style>
+            .stAppDeployButton{ 
+                visibility: hidden;
+            } 
+            </style>
+            """, unsafe_allow_html=True)
 st.title("hi! i am stramlit web")
 st.subheader("hi! i am your sun header")
 st.header("i am header")
@@ -15,3 +22,11 @@ print("hello world")
 def func():
 return 0; """
 st.code(code,language = "python")
+st.write("# ill explore it tommorow")
+st.metric(label="wind speed", value="120m\^-1", delta='-1.4ms\^-1')#i will see this tommorow th workong of m/s thing
+st.table(tabel)
+st.dataframe(tabel)
+st.image("image.png", caption="this is a image",width=90)
+#st.audio("audio.mp3")
+#st.video("video.mp4")
+
