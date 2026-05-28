@@ -1,24 +1,30 @@
 import streamlit as st
-import pandas as pd
-tabel = pd.DataFrame({"column 1":[1,2,3,4,5,6,7], "column 2": [11,12,13,14,15,16,17]})
-st.markdown("""
-            <style>
-            .stAppDeployButton{ 
-                visibility: hidden;
-            } 
-            </style>
-            """, unsafe_allow_html=True)
+
 
 def change():
     print("changed")
-    print(st.session_state.changed)#using key we may track the seeion
 
-state = st.checkbox("basic chcekbox",value=False, on_change=change, key="changed")
-
+st.checkbox("I agree to the terms and conditions")
+st.checkbox("chekbox", value=True)#default is false
+state = st.checkbox("chekbox")
 if state:
-    st.write("chek box was ticked")
+    st.write("hi")
 else:
-    pass #no need to do anything
+    pass
 
-#invoking of a function using this chek box
+#creating a radio button
+radio_button = st.radio("well what is you name", options = ("Alice", "Bob", "Charlie"))
+#print(radio_button)
+#defining a button
 
+def btn_click():
+    print("it good to learn steamlit")
+
+st.button("click me", on_click=btn_click)
+select = st.selectbox("what isnyour favorite color", options = ("red", "blue", "green"))
+
+print(select)
+
+multiselect =  st.multiselect("what are your favorite colors", 
+                              options = ("red", "blue", "green", "yellow"))
+st.write(multiselect)
