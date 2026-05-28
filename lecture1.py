@@ -1,55 +1,29 @@
 import streamlit as st
+import time
+from datetime import time as dt_time
+# bar  = st.progress(0,text="Loading...")#strting from 0 its in terms of percentage and the bar is from 1 to 100 initializing value is 0
+# for i in range(10):
+#     time.sleep(1) #sleep for 1 second
+#     bar.progress((i+1)*10)
 
-
-def change():
-    print("hello i am being called by slider")
-
-st.checkbox("I agree to the terms and conditions")
-st.checkbox("chekbox", value=True)#default is false
-state = st.checkbox("chekbox")
-if state:
-    st.write("hi")
+def converter(value):#(00.00.00)
+    m, s, ms = value.split(":")#will split and allocate the values as well
+    ts = int(m)*60 + int(s) + int(ms)/1000 #converting the time to seconds
+    return ts
+# Creating the time input widget with a default value
+# Format: hours, minutes, seconds
+val =st.time_input("Set an alarm", value = dt_time(0, 0, 0)) #To build the timer, the instructor uses st.time_input. He explains that to set a default value of "00:00:00", you must use a datetime object, not a string or integer
+if str(val) != "00:00:00": #if the value is not equal to 00:00:00 then only the timer will start
+    sec = converter(str(val))
+    per = sec/100#divided into 100 parts
+    bar = st.progress(0,text="Loading...")#strting from 0 its in terms of percentage and the bar is from 1 to 100 initializing value is 0
+    progress_status = st.empty() #to display the progress status//special object for beep
+    for i in range(100):
+       
+       #when the 100th part of the second willl reach the progress bar will reach the 100 as well
+        bar.progress(i+1)
+        progress_status.write(f"Progress: {i+1}%")
+        time.sleep(per)
 else:
-    pass
-
-#creating a radio button
-radio_button = st.radio("well what is you name", options = ("Alice", "Bob", "Charlie"))
-#print(radio_button)
-#defining a button
-
-def btn_click():
-    print("it good to learn steamlit")
-
-st.button("click me", on_click=btn_click)
-select = st.selectbox("what isnyour favorite color", options = ("red", "blue", "green"))
-
-print(select)
-st.write(select)
-
-multiselect =  st.multiselect("what are your favorite colors", 
-                              options = ("red", "blue", "green", "yellow"))
-st.write(multiselect)
-images = st.file_uploader("upload your image", type = ["jpg", "png"],accept_multiple_files = True,)
-
-# if image is not None:
-#     st.image(image)#st.video,st.audio
-if images is not None:
-    for image in images:
-        st.image(image)
+    st.write("please select a time")
         
-st.slider("this is a slider")#kind of refreshes the page totally
-val = st.slider("this is a slidr",min_value=0, max_value=50, value=50, step=5,on_change=change)
-print(val)    
-
-#multiple file uploader
-st.file_uploader("upload your file", type = ["pdf", "docx"], accept_multiple_files = True)
-
-name = st.text_input("enter your name")
-st.write(name)
-print(name)
-text  = st.text_area("enter your address")
-print(text)
-sde = st.date_input("enter your date of birth")
-st.write(sde)
-opy = st.select_slider("what is your favorite color", options = ("blue", "green", "yellow"))
-st.write(opy)
